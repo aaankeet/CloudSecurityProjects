@@ -45,10 +45,3 @@ A collection of production-grade cloud security projects designed to demonstrate
 | 6 | [Break-Glass Access](./06-break-glass-access/) | Operations | Emergency procedures, governance, audit trails |
 | 7 | [Secrets Management](./07-secrets-management/) | Credential Hygiene | Vault patterns, rotation, blast radius reduction |
 | 8 | [Threat Modeling](./08-threat-modeling/) | Risk Analysis | STRIDE, attack paths, control mapping |
-
-
-
-
-
-
-**Remember:** You are not trying to prove that you can follow instructions. You are proving that you can operate as a cloud security professional. That is what makes a profile stand out.
