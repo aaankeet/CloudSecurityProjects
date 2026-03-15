@@ -14,20 +14,47 @@ The project also includes **security validation tests** that verify the effectiv
 
 ![Architecture Diagram](docs/architecture-diagram.PNG)
 
-### High-Level Design
+---
 
-```
-Internet
-   │
-   ▼
-Application Load Balancer (Public Subnets)
-   │
-   ▼
-Private Application Tier (Private Subnets)
-   │
-   ▼
-Database Tier (Isolated Data Subnets)
-```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                           NETWORK TRAFFIC FLOWS                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+INBOUND (User Request):
+═══════════════════════
+
+    Internet
+       │
+       ▼
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   Internet   │────▶│     ALB      │────▶│  App Server  │────▶│   Database   │
+│   Gateway    │     │  (Public)    │     │  (Private)   │     │    (Data)    │
+└──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
+                           │                    │                     │
+                           ▼                    ▼                     ▼
+                     SG: 443 only         SG: ALB only          SG: App only
+                     from internet        on port 8080          on port 5432
+
+
+OUTBOUND (Server Updates):
+══════════════════════════
+
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│  App Server  │────▶│ NAT Gateway  │────▶│   Internet   │
+│  (Private)   │     │  (Public)    │     │   Gateway    │──────▶ Internet
+└──────────────┘     └──────────────┘     └──────────────┘
+
+    Route table:                Route table:
+    0.0.0.0/0 → NAT             0.0.0.0/0 → IGW
+
+
+DATA TIER (Isolated):
+═════════════════════
+
+┌──────────────┐     ┌──────────────┐
+│   Database   │  ✗  │   Internet   │    NO outbound internet access
+│   (Data)     │─────│              │    Must use VPC endpoints for
+└──────────────┘     └──────────────┘    AWS service access
 
 ---
 
