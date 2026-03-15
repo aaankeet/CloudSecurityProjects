@@ -219,10 +219,7 @@ aws-secure-vpc-terraform
 │   ├── endpoints.tf
 │   ├── flow_logs.tf
 │   └── outputs.tf
-│
-├── diagrams
-│   └── architecture.py
-│
+│   
 ├── docs
 │   ├── architecture.png
 │   ├── security-tests.md
