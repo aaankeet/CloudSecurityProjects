@@ -1,4 +1,4 @@
-# Secure AWS VPC Architecture with Terraform
+# Secure AWS VPC Using Infrastructure as Code (Terraform)
 
 ## Overview
 
