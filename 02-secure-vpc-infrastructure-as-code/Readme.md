@@ -12,7 +12,7 @@ The project also includes **security validation tests** that verify the effectiv
 
 # Architecture
 
-![Architecture Diagram](docs/architecture.png)
+![Architecture Diagram](docs/architecture-diagram.png)
 
 ### High-Level Design
 
