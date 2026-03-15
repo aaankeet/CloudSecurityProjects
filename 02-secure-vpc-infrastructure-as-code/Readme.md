@@ -60,13 +60,51 @@ DATA TIER (Isolated):
 └──────────────┘     └──────────────┘    AWS service access
 ```
 
+## Security Layers
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│                        DEFENSE IN DEPTH LAYERS                                  │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+     LAYER 1: Network ACLs (Subnet Level - Stateless)
+     ═════════════════════════════════════════════════
+     ┌─────────────────────────────────────────────────────────────────┐
+     │  NACL: Default deny + explicit allows                          │
+     │  • Inbound: Allow 443 from 0.0.0.0/0 to public subnets        │
+     │  • Inbound: Allow ephemeral ports for return traffic           │
+     │  • Outbound: Allow all to 0.0.0.0/0 (stateless, need return)  │
+     └─────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+     LAYER 2: Security Groups (Instance Level - Stateful)
+     ═════════════════════════════════════════════════════
+     ┌─────────────────────────────────────────────────────────────────┐
+     │  SG: Reference other SGs, not CIDR blocks                      │
+     │                                                                 │
+     │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
+     │  │   ALB-SG    │───▶│   App-SG    │───▶│   DB-SG     │         │
+     │  │ In: 443/any │    │ In: 8080    │    │ In: 5432    │         │
+     │  │             │    │    from     │    │    from     │         │
+     │  │             │    │   ALB-SG    │    │   App-SG    │         │
+     │  └─────────────┘    └─────────────┘    └─────────────┘         │
+     └─────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+     LAYER 3: Host-Based Controls (OS Level)
+     ═════════════════════════════════════════
+     ┌─────────────────────────────────────────────────────────────────┐
+     │  • iptables/nftables on Linux                                  │
+     │  • Application-level authentication                            │
+     │  • TLS everywhere                                              │
+     └─────────────────────────────────────────────────────────────────┘
+```
 ---
 
 # Infrastructure Components
 
 ### Networking
 
-* Custom VPC
 * Public Subnets (Load Balancer)
 * Private Subnets (Application Tier)
 * Data Subnets (Database Tier)
@@ -120,7 +158,7 @@ Key Terraform modules:
 Allowed traffic flows:
 
 ```
-Internet → ALB (80 / 443)
+Internet → ALB (443)
 ALB → Application Tier (8080)
 Application Tier → Database (5432)
 ```
