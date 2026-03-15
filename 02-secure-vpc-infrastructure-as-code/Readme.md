@@ -16,6 +16,9 @@ The project also includes **security validation tests** that verify the effectiv
 
 ---
 
+## Traffic Flow Diagram
+
+```
 ┌─────────────────────────────────────────────────────────────────────────────────┐
 │                           NETWORK TRAFFIC FLOWS                                 │
 └─────────────────────────────────────────────────────────────────────────────────┘
@@ -55,6 +58,7 @@ DATA TIER (Isolated):
 │   Database   │  ✗  │   Internet   │    NO outbound internet access
 │   (Data)     │─────│              │    Must use VPC endpoints for
 └──────────────┘     └──────────────┘    AWS service access
+```
 
 ---
 
