@@ -37,7 +37,7 @@ A collection of production-grade cloud security projects designed to demonstrate
 
 | # | Project | Domain | Key Skills Demonstrated |
 |---|---------|--------|------------------------|
-| 1 | [IAM Cross-Account Access](./01-iam-cross-account-access/) | Identity | Multi-account architecture, least privilege, role assumption |
+| 1 | [IAM Cross-Account Access](./01-cross-account-access/) | Identity | Multi-account architecture, least privilege, role assumption |
 | 2 | [VPC Infrastructure as Code](./02-vpc-infrastructure-as-code/) | Network | Terraform, network segmentation, security groups |
 | 3 | [CI/CD Security Pipeline](./03-cicd-security-pipeline/) | DevSecOps | Shift-left security, policy as code, automation |
 | 4 | [Cloud Security Audit](./04-cloud-security-audit/) | Compliance | Prowler, risk prioritization, remediation planning |
