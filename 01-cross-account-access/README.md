@@ -57,14 +57,20 @@ Two personas are modeled end-to-end:
 ## File Structure
 
 ```
-.
-├── provider.tf          # AWS provider config for both accounts
-├── variables.tf         # All input variables
-├── terraform.tfvars     # Account IDs and ExternalId values
-├── security-iam.tf      # Users, roles, and policies in Security Account
-├── workload-iam.tf      # Roles and trust policies in Workload Account
-├── role-policy.tf       # Permission policies attached to workload roles
-└── outputs.tf           # Credentials output (sensitive)
+.01-cross-account-access
+├──README.md
+├── SECURITY.md
+├── terraform/
+|  ├── provider.tf          # AWS provider config for both accounts
+|  ├── variables.tf         # All input variables
+|  ├── terraform.tfvars     # Account IDs and ExternalId values
+│  ├── security-iam.tf      # Users, roles, and policies in Security Account
+│  ├── workload-iam.tf      # Roles and trust policies in Workload Account
+│  ├── role-policy.tf       # Permission policies attached to workload roles
+│  └── outputs.tf           # Credentials output (sensitive)
+└── docs/
+      └── architecture-diagram.html
+      └── AWS-CrossAccount-IAM-Documentation.docx     
 ```
 
 ---
