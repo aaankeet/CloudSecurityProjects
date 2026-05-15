@@ -274,7 +274,3 @@ terraform destroy
 * Security validation testing
 
 ---
-
-# License
-
-This project is provided for educational and portfolio purposes.
